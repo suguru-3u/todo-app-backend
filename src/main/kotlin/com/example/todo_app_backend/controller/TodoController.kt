@@ -1,11 +1,14 @@
 package com.example.todo_app_backend.controller
 
+import com.example.todo_app_backend.service.TodoService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api")
-class TodoController {
+class TodoController(
+    private val todoService: TodoService
+) {
 
     private val todos = mutableListOf<TodoItem>(
         TodoItem(1, "Buy groceries", false),
@@ -17,7 +20,7 @@ class TodoController {
     @RequestMapping("/todos", method = [RequestMethod.GET])
     fun index(): List<TodoItem> {
         println("GETリクエストを検知")
-        return todos
+        return todoService.index()
     }
 
     data class TodoItem(
