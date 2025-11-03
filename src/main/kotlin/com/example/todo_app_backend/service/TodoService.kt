@@ -1,6 +1,8 @@
 package com.example.todo_app_backend.service
 
 import com.example.todo_app_backend.controller.TodoController
+import com.example.todo_app_backend.controller.TodoController.RequestCreateTodoItem
+import com.example.todo_app_backend.model.Todo
 import com.example.todo_app_backend.repository.TodoRepository
 import org.springframework.stereotype.Service
 
@@ -11,5 +13,13 @@ class TodoService(
 
     fun index(): MutableList<TodoController.TodoItem> {
         return todoRepository.index()
+    }
+
+    fun create(request: RequestCreateTodoItem) {
+        todoRepository.create(
+            todo = Todo(
+                text = Todo.TodoText(text = request.text)
+            )
+        )
     }
 }

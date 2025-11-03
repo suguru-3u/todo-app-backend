@@ -31,15 +31,9 @@ class TodoController(
 
     @RequestMapping("/todo", method = [RequestMethod.POST])
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody request: RequestTodoItem) {
+    fun create(@RequestBody request: RequestCreateTodoItem) {
         println("POSTリクエストを検知")
-        todos.add(
-            TodoItem(
-                id = todos.size + 1,
-                text = request.text,
-                completed = request.completed
-            )
-        )
+        todoService.create(request)
     }
 
     data class RequestTodoItem(
@@ -67,4 +61,8 @@ class TodoController(
             )
         }
     }
+
+    data class RequestCreateTodoItem(
+        val text: String
+    )
 }

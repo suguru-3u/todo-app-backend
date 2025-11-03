@@ -1,6 +1,7 @@
 package com.example.todo_app_backend.repository
 
 import com.example.todo_app_backend.controller.TodoController
+import com.example.todo_app_backend.model.Todo
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
 
@@ -18,5 +19,10 @@ class TodoRepository(
                 completed = rs.getBoolean("is_completed")
             )
         }
+    }
+
+    fun create(todo: Todo): Int {
+        val sql = "INSERT INTO todo (text) VALUES (?)"
+        return jdbcTemplate.update(sql, todo.text.text)
     }
 }
