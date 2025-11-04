@@ -10,13 +10,6 @@ class TodoController(
     private val todoService: TodoService
 ) {
 
-    private val todos = mutableListOf<TodoItem>(
-        TodoItem(1, "Buy groceries", false),
-        TodoItem(2, "Walk the dog", true),
-        TodoItem(3, "Read a book", false)
-    )
-
-
     @RequestMapping("/todos", method = [RequestMethod.GET])
     fun index(): List<TodoItem> {
         println("GETリクエストを検知")
@@ -35,11 +28,6 @@ class TodoController(
         println("POSTリクエストを検知")
         todoService.create(request)
     }
-
-    data class RequestTodoItem(
-        val text: String,
-        val completed: Boolean
-    )
 
     @RequestMapping("/todo/{id}", method = [RequestMethod.DELETE])
     @ResponseStatus(HttpStatus.NO_CONTENT)
