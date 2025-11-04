@@ -26,6 +26,11 @@ class TodoRepository(
         return jdbcTemplate.update(sql, todo.text.text)
     }
 
+    fun update(todo: Todo) {
+        val sql = "UPDATE todo SET is_completed = ? WHERE id = ?"
+        jdbcTemplate.update(sql, todo.completed, todo.id.id)
+    }
+
     fun delete(id: Todo.TodoId) {
         val sql = "DELETE FROM todo WHERE id = ?"
         jdbcTemplate.update(sql, id.id)

@@ -23,6 +23,16 @@ class TodoService(
         )
     }
 
+    fun update(id: Int, request: TodoController.RequestUpdateTodoItem) {
+        todoRepository.update(
+            todo = Todo(
+                id = Todo.TodoId(id = id),
+                text = Todo.TodoText(text = request.text),
+                completed = request.completed
+            )
+        )
+    }
+
     fun delete(id: Int) {
         todoRepository.delete(
             id = Todo.TodoId(

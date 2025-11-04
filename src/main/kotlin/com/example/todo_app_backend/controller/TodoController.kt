@@ -50,19 +50,17 @@ class TodoController(
 
     @RequestMapping("/todo/{id}", method = [RequestMethod.PUT])
     @ResponseStatus(HttpStatus.OK)
-    fun update(@PathVariable id: Int, @RequestBody request: RequestTodoItem) {
+    fun update(@PathVariable id: Int, @RequestBody request: RequestUpdateTodoItem) {
         println("PUTリクエストを検知")
-        val index = todos.indexOfFirst { it.id == id }
-        if (index != -1) {
-            todos[index] = TodoItem(
-                id = id,
-                text = request.text,
-                completed = request.completed
-            )
-        }
+        todoService.update(id, request)
     }
 
     data class RequestCreateTodoItem(
         val text: String
+    )
+
+    data class RequestUpdateTodoItem(
+        val text: String,
+        val completed: Boolean
     )
 }
