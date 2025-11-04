@@ -45,7 +45,7 @@ class TodoController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Int) {
         println("DELETEリクエストを検知")
-        todos.removeIf { it.id == id }
+        todoService.delete(id)
     }
 
     @RequestMapping("/todo/{id}", method = [RequestMethod.PUT])

@@ -22,4 +22,12 @@ class TodoService(
             )
         )
     }
+
+    fun delete(id: Int) {
+        todoRepository.delete(
+            id = Todo.TodoId(
+                id = id
+            )
+        )
+    }
 }

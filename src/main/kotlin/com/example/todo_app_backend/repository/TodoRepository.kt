@@ -25,4 +25,9 @@ class TodoRepository(
         val sql = "INSERT INTO todo (text) VALUES (?)"
         return jdbcTemplate.update(sql, todo.text.text)
     }
+
+    fun delete(id: Todo.TodoId) {
+        val sql = "DELETE FROM todo WHERE id = ?"
+        jdbcTemplate.update(sql, id.id)
+    }
 }
