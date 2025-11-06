@@ -24,9 +24,12 @@ class TodoService(
     }
 
     fun update(id: Int, request: TodoController.RequestUpdateTodoItem) {
+        val todoId = Todo.TodoId(id = id)
+        val result = todoRepository.find(id = todoId)
+        if (result.isEmpty()) throw Error("存在しないTodoIdです")
         todoRepository.update(
             todo = Todo(
-                id = Todo.TodoId(id = id),
+                id = todoId,
                 text = Todo.TodoText(text = request.text),
                 completed = request.completed
             )
@@ -34,10 +37,11 @@ class TodoService(
     }
 
     fun delete(id: Int) {
+        val todoId = Todo.TodoId(id = id)
+        val result = todoRepository.find(id = todoId)
+        if (result.isEmpty()) throw Error("存在しないTodoIdです")
         todoRepository.delete(
-            id = Todo.TodoId(
-                id = id
-            )
+            id = todoId
         )
     }
 }
