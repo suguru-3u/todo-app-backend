@@ -4,7 +4,6 @@ import com.example.todo_app_backend.controller.TodoController
 import com.example.todo_app_backend.model.Todo
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.query
-import org.springframework.jdbc.core.queryForObject
 import org.springframework.stereotype.Repository
 
 @Repository
