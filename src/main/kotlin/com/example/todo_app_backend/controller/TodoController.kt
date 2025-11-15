@@ -2,12 +2,15 @@ package com.example.todo_app_backend.controller
 
 import com.example.todo_app_backend.service.TodoService
 import org.springframework.http.HttpStatus
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.core.context.SecurityContext
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api")
 class TodoController(
-    private val todoService: TodoService
+    private val todoService: TodoService,
 ) {
 
     @RequestMapping("/todos", method = [RequestMethod.GET])
@@ -15,6 +18,13 @@ class TodoController(
         println("GETリクエストを検知")
         return todoService.index()
     }
+
+    @RequestMapping("/test", method = [RequestMethod.GET])
+    fun test(@AuthenticationPrincipal userDetails: UserDetails) {
+        println("Testリクエストを検知")
+        println("principal: ${userDetails}")
+    }
+
 
     data class TodoItem(
         val id: Int,
