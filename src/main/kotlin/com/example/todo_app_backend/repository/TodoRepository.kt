@@ -1,6 +1,7 @@
 package com.example.todo_app_backend.repository
 
 import com.example.todo_app_backend.controller.TodoController
+import com.example.todo_app_backend.model.RegisterTodo
 import com.example.todo_app_backend.model.Todo
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.query
@@ -22,9 +23,9 @@ class TodoRepository(
         }
     }
 
-    fun create(todo: Todo): Int {
-        val sql = "INSERT INTO todo (text) VALUES (?)"
-        return jdbcTemplate.update(sql, todo.text.text)
+    fun create(todo: RegisterTodo): Int {
+        val sql = "INSERT INTO todo (text,user_id) VALUES (?,?)"
+        return jdbcTemplate.update(sql, todo.text.text, todo.userId)
     }
 
     fun find(id: Todo.TodoId): List<Todo> {

@@ -2,9 +2,11 @@ package com.example.todo_app_backend.service
 
 import com.example.todo_app_backend.controller.TodoController
 import com.example.todo_app_backend.controller.TodoController.RequestCreateTodoItem
+import com.example.todo_app_backend.model.RegisterTodo
 import com.example.todo_app_backend.model.Todo
 import com.example.todo_app_backend.repository.TodoRepository
 import org.springframework.stereotype.Service
+import java.security.Principal
 
 @Service
 class TodoService(
@@ -15,10 +17,11 @@ class TodoService(
         return todoRepository.index()
     }
 
-    fun create(request: RequestCreateTodoItem) {
+    fun create(principal: Principal, request: RequestCreateTodoItem) {
         todoRepository.create(
-            todo = Todo(
-                text = Todo.TodoText(text = request.text)
+            todo = RegisterTodo(
+                text = RegisterTodo.TodoText(text = request.text),
+                userId = principal.name.toInt()
             )
         )
     }

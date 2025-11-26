@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 @RestController
 @RequestMapping("api")
@@ -33,9 +34,15 @@ class TodoController(
 
     @RequestMapping("/todo", method = [RequestMethod.POST])
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody request: RequestCreateTodoItem) {
+    fun create(
+        @AuthenticationPrincipal principal: Principal,
+        @RequestBody request: RequestCreateTodoItem
+    ) {
         println("POSTリクエストを検知")
-        todoService.create(request)
+        todoService.create(
+            principal = principal,
+            request = request
+        )
     }
 
     @RequestMapping("/todo/{id}", method = [RequestMethod.DELETE])
