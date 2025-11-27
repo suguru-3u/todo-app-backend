@@ -20,15 +20,21 @@ repositories {
 }
 
 dependencies {
+	// SpringのWEBに関する処理の依存関係の追加
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	// JDBC依存関係の追加
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
+	// Spring Security依存関係の追加
 	implementation("org.springframework.boot:spring-boot-starter-security")
+ 	// Redis依存関係の追加
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-	runtimeOnly("com.mysql:mysql-connector-j") // バージョンは適宜変更してください
+	// MySQLドライバの依存関係の追加
+	runtimeOnly("com.mysql:mysql-connector-j")
 }
 
 kotlin {
