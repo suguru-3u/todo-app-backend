@@ -1,5 +1,10 @@
 package com.example.todo_app_backend.config
 
+import jakarta.servlet.Filter
+import jakarta.servlet.FilterChain
+import jakarta.servlet.ServletRequest
+import jakarta.servlet.ServletResponse
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -7,13 +12,15 @@ import org.springframework.security.authentication.ProviderManager
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.invoke
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
-import org.springframework.security.config.annotation.web.invoke
+import org.springframework.security.web.access.intercept.AuthorizationFilter
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +33,17 @@ class SecurityConfig {
                 authorize("/api/login", permitAll)
                 authorize(anyRequest, authenticated)
             }
+
+            // セッションポリシーを設定
+            sessionManagement {
+                sessionCreationPolicy =
+                    org.springframework.security.config.http.SessionCreationPolicy.IF_REQUIRED
+                sessionFixation { migrateSession() }
+            }
+
+            // Spring Session 環境では、securityContextRepository を明示的に設定しない
+            // Spring Session が @EnableRedisHttpSession で自動的に SecurityContext を管理します
+            // デフォルト設定のままで OK
 
             csrf { disable() }
             formLogin { disable() }
@@ -42,9 +60,6 @@ class SecurityConfig {
     ): AuthenticationManager {
         val authenticationProvider = DaoAuthenticationProvider(userDetailsService)
         authenticationProvider.setPasswordEncoder(passwordEncoder)
-
-        println("認証検証")
-
         return ProviderManager(authenticationProvider)
     }
 
@@ -53,7 +68,6 @@ class SecurityConfig {
         val user = User.withDefaultPasswordEncoder()
             .username("user")
             .password("password")
-            .roles("USER")
             .build()
 
         return InMemoryUserDetailsManager(user)
@@ -63,5 +77,4 @@ class SecurityConfig {
     fun passwordEncoder(): PasswordEncoder {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder()
     }
-
 }
