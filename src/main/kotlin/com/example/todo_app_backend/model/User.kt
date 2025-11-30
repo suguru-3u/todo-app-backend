@@ -1,8 +1,8 @@
 package com.example.todo_app_backend.model
 
 class User(
-    val userId: UserId,
+    val userId: AccountId,
 ) {
     @JvmInline
-    value class UserId(val id: Int)
+    value class AccountId(val id: String)
 }

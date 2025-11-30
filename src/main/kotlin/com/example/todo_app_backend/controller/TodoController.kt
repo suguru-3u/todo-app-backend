@@ -1,8 +1,11 @@
 package com.example.todo_app_backend.controller
 
 import com.example.todo_app_backend.service.TodoService
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
@@ -14,10 +17,19 @@ class TodoController(
 ) {
 
     @RequestMapping("/todos", method = [RequestMethod.GET])
-    fun index(): List<TodoItem> {
-        println("GETリクエストを検知")
-        return todoService.index()
+    fun index(authentication: Authentication?, request: HttpServletRequest,@AuthenticationPrincipal principal: User) {
+        println("==== /api/todos ====")
+        println("authentication = $authentication")
+        println("principal = ${authentication?.principal}")
+        println("session id = ${request.session.id}")
+        println("User from @AuthenticationPrincipal = ${principal}")
     }
+//    @RequestMapping("/todos", method = [RequestMethod.GET])
+//    fun index(@AuthenticationPrincipal principal: User): List<TodoItem> {
+//        println("GETリクエストを検知")
+//        println("principal: ${principal}")
+//        return todoService.index(principal)
+//    }
 
     @RequestMapping("/test", method = [RequestMethod.GET])
     fun test(@AuthenticationPrincipal userDetails: UserDetails) {

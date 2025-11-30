@@ -14,6 +14,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository
 
 @Configuration
 @EnableWebSecurity
@@ -34,9 +35,13 @@ class SecurityConfig {
                 sessionFixation { migrateSession() }
             }
 
-            // Spring Session 環境では、securityContextRepository を明示的に設定しない
-            // Spring Session が @EnableRedisHttpSession で自動的に SecurityContext を管理します
-            // デフォルト設定のままで OK
+            // Spring Session 環境での SecurityContextRepository の設定
+            // HttpSessionSecurityContextRepository を使用してセッションから SecurityContext を復元
+            securityContext {
+                // この設定がないとSessionへの保存を明示的に書かないといけない
+                requireExplicitSave = false
+                securityContextRepository = HttpSessionSecurityContextRepository()
+            }
 
             csrf { disable() }
             formLogin { disable() }

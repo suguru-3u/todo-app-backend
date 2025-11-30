@@ -3,6 +3,7 @@ package com.example.todo_app_backend.repository
 import com.example.todo_app_backend.controller.TodoController
 import com.example.todo_app_backend.model.RegisterTodo
 import com.example.todo_app_backend.model.Todo
+import com.example.todo_app_backend.model.User
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.query
 import org.springframework.stereotype.Repository
@@ -12,9 +13,9 @@ class TodoRepository(
     private val jdbcTemplate: JdbcTemplate,
 ) {
 
-    fun index(): MutableList<TodoController.TodoItem> {
-        val sql = "SELECT * FROM todo"
-        return jdbcTemplate.query(sql) { rs, _ ->
+    fun index(userId: User.AccountId): List<TodoController.TodoItem> {
+        val sql = "SELECT * FROM todo WHERE user_id = ?"
+        return jdbcTemplate.query(sql, userId.id) { rs, _ ->
             TodoController.TodoItem(
                 id = rs.getInt("id"),
                 text = rs.getString("text"),
