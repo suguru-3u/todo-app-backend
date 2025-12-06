@@ -15,7 +15,6 @@ class TodoController(
     @RequestMapping("/todos", method = [RequestMethod.GET])
     fun index(@AuthenticationPrincipal principal: User): List<TodoItem> {
         println("GETリクエストを検知")
-        println("principal: ${principal}")
         return todoService.index(principal)
     }
 
