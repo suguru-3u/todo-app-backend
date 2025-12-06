@@ -1,12 +1,9 @@
 package com.example.todo_app_backend.controller
 
 import com.example.todo_app_backend.service.TodoService
-import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
-import org.springframework.security.core.Authentication
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.User
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
 
