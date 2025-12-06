@@ -14,7 +14,7 @@ class TodoRepository(
 ) {
 
     fun index(userId: User.AccountId): List<TodoController.TodoItem> {
-        val sql = "SELECT * FROM todo WHERE user_id = ?"
+        val sql = "SELECT * FROM todo WHERE accountId = ?"
         return jdbcTemplate.query(sql, userId.id) { rs, _ ->
             TodoController.TodoItem(
                 id = rs.getInt("id"),

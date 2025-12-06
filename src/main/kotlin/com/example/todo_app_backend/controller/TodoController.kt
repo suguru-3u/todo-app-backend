@@ -15,28 +15,12 @@ import java.security.Principal
 class TodoController(
     private val todoService: TodoService,
 ) {
-
     @RequestMapping("/todos", method = [RequestMethod.GET])
-    fun index(authentication: Authentication?, request: HttpServletRequest,@AuthenticationPrincipal principal: User) {
-        println("==== /api/todos ====")
-        println("authentication = $authentication")
-        println("principal = ${authentication?.principal}")
-        println("session id = ${request.session.id}")
-        println("User from @AuthenticationPrincipal = ${principal}")
+    fun index(@AuthenticationPrincipal principal: User): List<TodoItem> {
+        println("GETリクエストを検知")
+        println("principal: ${principal}")
+        return todoService.index(principal)
     }
-//    @RequestMapping("/todos", method = [RequestMethod.GET])
-//    fun index(@AuthenticationPrincipal principal: User): List<TodoItem> {
-//        println("GETリクエストを検知")
-//        println("principal: ${principal}")
-//        return todoService.index(principal)
-//    }
-
-    @RequestMapping("/test", method = [RequestMethod.GET])
-    fun test(@AuthenticationPrincipal userDetails: UserDetails) {
-        println("Testリクエストを検知")
-        println("principal: ${userDetails}")
-    }
-
 
     data class TodoItem(
         val id: Int,

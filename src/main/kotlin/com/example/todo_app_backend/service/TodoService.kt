@@ -7,6 +7,7 @@ import com.example.todo_app_backend.model.Todo
 import com.example.todo_app_backend.model.User
 import com.example.todo_app_backend.repository.TodoRepository
 import org.springframework.stereotype.Service
+
 import java.security.Principal
 
 @Service
@@ -14,9 +15,9 @@ class TodoService(
     private val todoRepository: TodoRepository
 ) {
 
-    fun index(principal: Principal): List<TodoController.TodoItem> {
+    fun index(principal: org.springframework.security.core.userdetails.User): List<TodoController.TodoItem> {
         return todoRepository.index(
-            userId = User.AccountId(principal.name)
+            userId = User.AccountId(principal.username)
         )
     }
 
