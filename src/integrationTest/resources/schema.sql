@@ -22,3 +22,6 @@ CREATE TABLE IF NOT EXISTS todo(
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY(accountId) REFERENCES user_info(accountId) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+
+INSERT INTO user_info(accountId, password) VALUES ('user', 'password');

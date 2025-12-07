@@ -65,6 +65,7 @@ dependencies {
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("org.testcontainers:mysql")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
+	testImplementation("com.redis:testcontainers-redis")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	// MySQLドライバの依存関係の追加
 	runtimeOnly("com.mysql:mysql-connector-j")
