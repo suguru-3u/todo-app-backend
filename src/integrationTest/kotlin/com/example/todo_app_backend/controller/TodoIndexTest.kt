@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.jdbc.core.JdbcTemplate
@@ -38,13 +36,7 @@ class TodoIndexTest : BaseIntegrationTest() {
     @Test
     fun contextLoads() {
         // ログインAPIの実行
-        val base = Base(restTemplate)
-        val result = base.contextLoads()
-
-        // セッションの取得
-        val headers = HttpHeaders()
-        headers.set("Cookie", result!!.headers["Set-Cookie"]!!.joinToString())
-        val entity = HttpEntity(null, headers)
+        val entity = Base1(restTemplate).getHttpSession()
 
         // リクエストの生成&実行
         val response = restTemplate.exchange(
