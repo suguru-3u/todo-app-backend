@@ -3,8 +3,10 @@ package com.example.todo_app_backend.controller
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -46,5 +48,17 @@ class AuthenticationController(
     }
 
     data class LoginRequest(val username: String, val password: String)
+
+
+    @RequestMapping("/auth/me", method = [RequestMethod.GET])
+    fun getCurrentUser(authentication: Authentication?): ResponseEntity<Any> {
+        println("GET /auth/me リクエストを検知")
+        println(authentication)
+        return if (authentication != null) {
+            ResponseEntity.status(HttpStatus.OK).build()
+        } else {
+            ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
+        }
+    }
 }
 
