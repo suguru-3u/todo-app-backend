@@ -6,11 +6,16 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserRegisterService(
-    val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    private val userFindService: UserFindService
 ) {
 
     fun execute(username: RegisterUser.Username, password: RegisterUser.Password) {
         println("ユーザー登録サービスが呼び出されました")
+
+        userFindService.findByByUsername(username).onSuccess {
+            throw Error("既に登録されているユーザーです")
+        }
 
         val hashedPassword = RegisterUser.HashedPassword.create(
             rowPassword = password,
@@ -21,8 +26,7 @@ class UserRegisterService(
             username = username,
             password = hashedPassword
         )
-        // ユーザーのエンティティを作成する
-        // データベースにusernameが存在するか確認
-        // パスワードを暗号化する
+
+        // ユーザーを登録する
     }
 }

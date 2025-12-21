@@ -37,6 +37,10 @@ class RegisterUser(
                 val hashedValue = passwordEncoder.encode(rowPassword.value)
                 return HashedPassword(hashedValue)
             }
+
+            fun fromRepository(hashedValue: String): HashedPassword {
+                return HashedPassword(hashedValue)
+            }
         }
     }
 }
