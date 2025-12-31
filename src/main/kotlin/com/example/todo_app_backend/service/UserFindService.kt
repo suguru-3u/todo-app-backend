@@ -15,6 +15,7 @@ class UserFindService(
             )
             return Result.success(result!!)
         } catch (e: IncorrectResultSizeDataAccessException) {
+            println("ログの出力")
             return Result.failure(Error("該当するユーザーが存在しません"))
         } catch (e: DataAccessException) {
             return Result.failure(Error("データベースエラーが発生しました"))
