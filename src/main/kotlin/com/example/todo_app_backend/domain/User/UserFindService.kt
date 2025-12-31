@@ -1,7 +1,6 @@
-package com.example.todo_app_backend.service
+package com.example.todo_app_backend.domain.User
 
-import com.example.todo_app_backend.model.RegisterUser
-import com.example.todo_app_backend.repository.UserRepository
+import com.example.todo_app_backend.repository.user.UserRepository
 import org.springframework.dao.DataAccessException
 import org.springframework.dao.IncorrectResultSizeDataAccessException
 

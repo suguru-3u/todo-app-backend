@@ -1,11 +1,11 @@
-package com.example.todo_app_backend.service
+package com.example.todo_app_backend.usecase.todo
 
 import com.example.todo_app_backend.controller.TodoController
 import com.example.todo_app_backend.controller.TodoController.RequestCreateTodoItem
-import com.example.todo_app_backend.model.RegisterTodo
-import com.example.todo_app_backend.model.Todo
-import com.example.todo_app_backend.model.User
-import com.example.todo_app_backend.repository.TodoRepository
+import com.example.todo_app_backend.domain.Todo.RegisterTodo
+import com.example.todo_app_backend.domain.Todo.Todo
+import com.example.todo_app_backend.domain.User.User
+import com.example.todo_app_backend.repository.todo.TodoRepository
 import org.springframework.stereotype.Service
 
 import java.security.Principal

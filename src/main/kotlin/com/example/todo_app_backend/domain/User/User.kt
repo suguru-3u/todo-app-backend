@@ -1,4 +1,4 @@
-package com.example.todo_app_backend.model
+package com.example.todo_app_backend.domain.User
 
 class User(
     val userId: AccountId,

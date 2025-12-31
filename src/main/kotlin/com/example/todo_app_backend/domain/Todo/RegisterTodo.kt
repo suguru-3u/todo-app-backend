@@ -1,9 +1,10 @@
-package com.example.todo_app_backend.model
+package com.example.todo_app_backend.domain.Todo
 
-class Todo(
+class RegisterTodo(
     val id: TodoId = TodoId(0),
     val text: TodoText,
     val completed: Boolean = false,
+    val userId: Int,
 ) {
     @JvmInline
     value class TodoId(val id: Int)

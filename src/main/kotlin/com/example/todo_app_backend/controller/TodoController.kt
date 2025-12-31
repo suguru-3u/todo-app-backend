@@ -1,6 +1,6 @@
 package com.example.todo_app_backend.controller
 
-import com.example.todo_app_backend.service.TodoService
+import com.example.todo_app_backend.usecase.todo.TodoService
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.User

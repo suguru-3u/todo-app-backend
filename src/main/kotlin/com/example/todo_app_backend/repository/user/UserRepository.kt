@@ -1,6 +1,6 @@
-package com.example.todo_app_backend.repository
+package com.example.todo_app_backend.repository.user
 
-import com.example.todo_app_backend.model.RegisterUser
+import com.example.todo_app_backend.domain.User.RegisterUser
 
 interface UserRepository {
 

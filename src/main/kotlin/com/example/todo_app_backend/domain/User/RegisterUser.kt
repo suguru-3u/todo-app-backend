@@ -1,4 +1,4 @@
-package com.example.todo_app_backend.model
+package com.example.todo_app_backend.domain.User
 
 import org.springframework.security.crypto.password.PasswordEncoder
 
@@ -12,9 +12,6 @@ class RegisterUser(
             require(value.trim().isNotEmpty()) {
                 throw Error("Usernameは空文字で登録できません")
             }
-//            require(username.length <= 32) {
-//                throw Error("Usernameの文字数が32文字よりも大きくいです")
-//            }
         }
     }
 
@@ -24,9 +21,6 @@ class RegisterUser(
             require(value.trim().isNotEmpty()) {
                 throw Error("Passwordは空文字で登録できません")
             }
-//            require(password.length <= 64) {
-//                throw Error("Passwordの文字数が64文字よりも大きくいです")
-//            }
         }
     }
 

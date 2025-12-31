@@ -1,11 +1,12 @@
-package com.example.todo_app_backend.service
+package com.example.todo_app_backend.usecase.user
 
-import com.example.todo_app_backend.model.RegisterUser
+import com.example.todo_app_backend.domain.User.UserFindService
+import com.example.todo_app_backend.domain.User.RegisterUser
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserRegisterService(
+class UserRegisterUseCase(
     private val passwordEncoder: PasswordEncoder,
     private val userFindService: UserFindService
 ) {

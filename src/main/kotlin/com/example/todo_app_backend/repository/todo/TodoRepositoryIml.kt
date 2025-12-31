@@ -1,9 +1,9 @@
-package com.example.todo_app_backend.repository
+package com.example.todo_app_backend.repository.todo
 
 import com.example.todo_app_backend.controller.TodoController
-import com.example.todo_app_backend.model.RegisterTodo
-import com.example.todo_app_backend.model.Todo
-import com.example.todo_app_backend.model.User
+import com.example.todo_app_backend.domain.Todo.RegisterTodo
+import com.example.todo_app_backend.domain.Todo.Todo
+import com.example.todo_app_backend.domain.User.User
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.query
 import org.springframework.stereotype.Repository

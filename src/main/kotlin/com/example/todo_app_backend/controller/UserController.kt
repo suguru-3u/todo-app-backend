@@ -1,7 +1,7 @@
 package com.example.todo_app_backend.controller
 
-import com.example.todo_app_backend.model.RegisterUser
-import com.example.todo_app_backend.service.UserRegisterService
+import com.example.todo_app_backend.domain.User.RegisterUser
+import com.example.todo_app_backend.usecase.user.UserRegisterUseCase
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("api")
 class UserController(
-    private val userRegisterService: UserRegisterService
+    private val userRegisterService: UserRegisterUseCase
 ) {
 
     @RequestMapping("/users/register")
